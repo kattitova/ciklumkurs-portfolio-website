@@ -5,12 +5,68 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="styles.css" rel="stylesheet">
+    <link href="./image/favicon.ico" rel="icon" type="image/x-icon">
     <title>Game Website</title>
 </head>
 <body>
-    <header></header>
-    <main></main>
-    <footer></footer>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#about-me" class="nav-link">Про мене</a></li>
+                <li><a href="#about-game" class="nav-link">Міні-гра</a></li>
+                <li><a href="#gallery" class="nav-link">Галерея</a></li>
+                <li><a href="#contact" class="nav-link">Контати</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="about-me" id="about-me">
+            <h1>Про мене</h1>
+            <p>Вітаю! Мене звуть Катерина і я навчаюсь на курсі Front-end розробки від Ciklum і Prometheus. Це навчальний проект, який спрямований на вивчення HTML, CSS та в подальшому і JS. В ньому представлена розробка міні-гри "Match 4 Multi".</p>
+        </section>
+        <section class="about-game" id="about-game">
+            <h2>Про гру "Match 4 Multi"</h2>
+            <p>Гра "Match 4 Multi" дозволяє весело, цікаво і з користю провести час. Гра "Match 4" схожа на класичні хрестики-нулики, але в ній потрібно зібрати чотири комірки одного кольору по вертикалі, горизонталі або діагоналі. У назві додатково присутньо слово Multi, бо це математична інтерпритація звичайної гри. В ній можна обирати лише ті комірки, які є результатом <strong>множення двох чисел</strong>. Перше число обирається на початку гри, а друге число генерується заново на кожному ході гравців. Ця гра розроблена для полегшення вивчення таблиці множення у ігровій формі для школярів молодших класів, а також для розвинення в них логічного та аналітичного мислення. Гра розрахована на двох гравців, які будуть змагатися, хто першим складе ряд власного кольору.</p>
+            <p><strong>Правила гри</strong>. На початку гри обирається перше незмінне число. Далі натискається кнопка "Почати гру". На екрані відображається повідомлення, який гравець зараз може зробити хід. Активний гравець натискає червону кнопку і генерує число. Далі гравець має порахувати результат множення двох чисел, знайти відповідну комірку з результатом і клікнути на неї. Комірка зафарбується у колір активного ігрока. Якщо немає комірки з правильною відповіддю, гравець має право заново згенерувати число. Далі хід переходить до наступного гравця. Перемагає той, хто першим зможе зібрати горизонтальний, вертикальний або діагональний рядок свого кольору з чьотирьох комірок.</p>
+            <div class="game-gallery" id="gallery">
+                <h2>Галерея гри</h2>
+                <img class="gallery-image" src="./image/1.jpg" alt="зображення гри Match 4 Multi">
+                <img class="gallery-image" src="./image/2.jpg" alt="зображення гри Match 4 Multi">
+                <img class="gallery-image" src="./image/3.jpg" alt="зображення гри Match 4 Multi">
+                <img class="gallery-image" src="./image/4.jpg" alt="зображення гри Match 4 Multi">
+            </div>
+        </section>
+        <section class="game">
+            <h2>Гра "Match 4 Multi"</h2>
+            <div class="game-wraper">
+                <div class="game-header">
+                    <div class="game-number-block"></div>
+                    <div class="game-info-block">
+                        <button class="game-start">Почати гру</button>
+                        <div class="game-players-block">
+                            <div class="game-player player-1">Гравець 1</div>
+                            <div class="game-player player-2">Гравець 2</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-main"></div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <section class="contact-form" id="contact">
+            <form class="contact-form">
+                <h3>Форма зворотнього зв'язку</h3>
+                <label for="name">Ім'я:</label>
+                <input id="name" type="text">
+                <label for="email">E-mail:</label>
+                <input id="email" type="mail">
+                <label for="message">Повідомлення:</label>
+                <textarea id="message"></textarea>
+                <button type="submit">Відправити</button>
+            </form>
+        </section>
+    </footer>
     <script type="text/javascript" src="script.js"></script>
 </body>
 </html>
