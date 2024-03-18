@@ -23,7 +23,7 @@
                     <li><a href="#play" class="nav-link">Грати!</a></li>
                 </ul>
             </nav>
-            <button href="#contact" class="contact-me">Зв'язатися зі мною</button>
+            <a href="#contact" class="contact-me">Зв'язатися зі мною</a>
         </div>
     </header>
     <main>
@@ -36,7 +36,7 @@
         </section>
         <section class="about-game" id="about-game">
             <div class="about-game-text">
-                <h2 class="about-game-title"><p>Гра</p><p>"Match 4 Multi"</p></h2>
+                <h2 class="about-game-title">Гра<br>"Match 4 Multi"</h2>
                 <div class="about-game-info">
                     <div class="game-info-players"><i class="fa-solid fa-user-group"></i>2 players</div>
                     <div class="game-info-age"><div class="about-game-age">7+</div>years</div>
@@ -52,11 +52,11 @@
             <h2 class="game-gallery-title">Галерея гри</h2>
             <img class="gallery-image" src="./image/1.jpg" alt="зображення гри Match 4 Multi">
             <img class="gallery-image" src="./image/2.jpg" alt="зображення гри Match 4 Multi">
-            <img class="gallery-image" src="./image/3.jpg" alt="зображення гри Match 4 Multi">
+            <img class="gallery-image" src="./image/5.jpg" alt="зображення гри Match 4 Multi">
             <img class="gallery-image" src="./image/4.jpg" alt="зображення гри Match 4 Multi">
         </section>
         <section class="game" id="play">
-            <h2>Гра "Match 4 Multi"</h2>
+            <h2 class="game-title">Гра "Match 4 Multi"</h2>
             <div class="game-wraper">
                 <div class="game-header">
                     <div class="game-number-block"></div>
@@ -69,50 +69,25 @@
                     </div>
                 </div>
                 <div class="game-main">
-                    <table class="game-table">
-                        <tr>
-                            <td>0</td>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>8</td>
-                            <td>9</td>
-                            <td>10</td>
-                            <td>11</td>
-                        </tr>
-                        <tr>
-                            <td>12</td>
-                            <td>13</td>
-                            <td>14</td>
-                            <td>15</td>
-                            <td>16</td>
-                            <td>170</td>
-                        </tr>
-                    </table>
+                    <table class="game-table"></table>
                 </div>
             </div>
         </section>
     </main>
-    <footer>
-        <section id="contact">
+    <footer id="contact">
+        <section>
             <form class="contact-form">
                 <h3>Форма зворотнього зв'язку</h3>
                 <label for="name">Ім'я:</label>
                 <input id="name" type="text">
                 <label for="email">E-mail:</label>
-                <input id="email" type="mail">
+                <input id="email" type="email">
                 <label for="message">Повідомлення:</label>
                 <textarea id="message"></textarea>
                 <button type="submit">Відправити</button>
             </form>
         </section>
     </footer>
-    <script type="text/javascript" src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
