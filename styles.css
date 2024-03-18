@@ -1,13 +1,264 @@
 *
     {
-        padding: 0;
+        box-sizing: border-box;
+        font-family: "Raleway", sans-serif;
         margin: 0;
+        padding: 0;
     }
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    align-items: center;
+    background-color: #28094c;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+}
 
 header {
-    background-color: aqua;
+    background: rgb(40,9,76);
+    background: linear-gradient(45deg, rgb(59 11 112) 0%, rgb(90 30 157) 35%, rgba(200, 130, 178, 1) 100%);
+    display: flex;
+    height: 70px;
+    justify-content: center;
+    padding-top: 7px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.header-wraper {
+    align-items: center;
+    background: rgb(40,9,73);
+    background: linear-gradient(45deg, rgba(40,9,73,1) 0%, rgba(64,15,140,1) 100%, rgba(11,8,48,1) 100%);
+    border: 1px solid #753a8d;
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-between;
+    height: 55px;
+    padding: 5px;
+    
+    width: calc(100% - 200px);
+}
+
+header ul {
+    display: flex;
+    justify-content: space-evenly;
+    list-style: none;
+}
+
+header li {
+    margin-right: 40px;
+}
+
+header li:last-child {
+    margin-right: 0;
+  }
+
+header .nav-link {
+    position: relative;
+}
+
+header .nav-link:hover {
+    font-weight: 600;
+}
+
+header .nav-link.active::after {
+    border-bottom: 3px solid #b92da1;
+    bottom: -18px;
+    content: '';
+    display: block;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+    width: 60px;    
+}
+
+header h1 {
+    font-size: 16px;
+    margin-left: 20px;
+}
+
+button,
+.contact-me {
+    background-color: #340c57;
+    border: 0;
+    border-radius: 50px;
+    color: #fff;
+    height: 100%;
+    line-height: 0;
+    outline: 0;
+    padding: 15px 30px;
+}
+
+.about-me {
+    background: rgb(40,9,76);
+    background: linear-gradient(45deg, rgba(40,9,76,1) 0%, rgba(64,15,140,1) 35%, rgba(200,130,178,1) 100%);
+    display: flex;
+    padding-right: 100px;
+    padding-top: 80px;
+}
+
+.about-me-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 50px 50px 30px 100px;
+}
+
+.about-me-title {
+    font-size: 50px;
+    position: relative;
+}
+
+.about-me-title::before {
+    content: "";
+    background-image: url(./image/line.png);
+    background-repeat: repeat;
+    display: block;
+    height: 165px;
+    left: -100px;
+    position: absolute;
+    width: 42px;
+}
+
+.about-me-content {
+    border-left: 2px solid #f5e0f7;
+    padding-left: 15px;
+}
+
+.about-me img {
+    height: 100%;
+    width: 100%;
+}
+
+.about-game {
+    display: flex;
+}
+
+.about-game-text {
+    padding: 50px 50px 30px 100px;
+}
+
+.about-game-title {
+    font-size: 50px;
+    text-wrap: nowrap;
+}
+
+.about-game-content {
+    border-left: 2px solid #f5e0f7;
+    margin-top: 50px;
+    padding: 0 100px 15px 15px;
+    position: relative;
+}
+
+.about-game-content::before {
+    content: "";
+    background-image: url(./image/dot.png);
+    background-repeat: repeat;
+    bottom: 5px;
+    display: block;
+    height: 165px;
+    left: -175px;
+    position: absolute;
+    width: 165px;
+}
+
+.about-game-info {
+    align-items: end;
+    display: flex;
+    text-align: center;
+}
+
+.game-info-players,
+.game-info-age {
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+}
+
+.fa-user-group {
+    font-size: 40px;
+}
+
+.about-game-age {
+    align-items: center;
+    background-color: #fff;
+    border-radius: 50px;
+    color: #28094c;
+    display: flex;
+    font-size: 30px;
+    font-weight: 600;
+    justify-content: center;
+    height: 50px;
+    line-height: 0;
+    width: 50px;
+}
+
+.game-gallery {
+    padding: 30px 100px;
+    text-align: center;
+}
+
+.game-gallery-title {
+    font-size: 30px;
 }
 
 .gallery-image {
     width: 200px;
+}
+
+.game-table {
+    background-color: rgb(75, 75, 75);
+    border-radius: 5px;
+    border-spacing: 4px;
+    color: rgb(255, 255, 255);
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.game-table td {
+    background-color: rgb(189, 184, 184);
+    border-radius: 3px;
+    height: 50px;
+    width: 50px;
+}
+
+.contact-form {
+    background-color: #5A2594;
+    border-radius: 15px;
+    box-shadow: inset 0 0 3px 0 #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 50px;
+}
+
+.contact-form label,
+.contact-form button {
+    margin-top: 20px;
+    margin-bottom: 5px
+}
+
+.contact-form button {
+    height: 43px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 10px;
+    resize: none;
 }
