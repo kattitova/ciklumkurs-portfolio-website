@@ -99,11 +99,13 @@ button,
     font-size: 16px;
     line-height: 0;
     outline: 0;
-    padding: 20px 30px;
+    padding: 22px 30px;
 }
 
-.contact-me:hover {
+.contact-me:hover,
+button:hover {
     box-shadow: inset 0 0 3px 0 #fff;
+    cursor: pointer;
 }
 
 .about-me {
@@ -140,6 +142,10 @@ button,
 .about-me-content {
     border-left: 2px solid #f5e0f7;
     padding-left: 15px;
+}
+
+.about-me-content a {
+    font-weight: 600;
 }
 
 .about-me img {
@@ -186,6 +192,11 @@ button,
     text-align: center;
 }
 
+.game {
+    background: rgb(40,9,76);
+    background: linear-gradient(45deg, rgba(40,9,76,1) 0%, rgba(64,15,140,1) 35%, rgba(200,130,178,1) 100%);
+}
+
 .game-info-players,
 .game-info-age {
     display: flex;
@@ -213,7 +224,7 @@ button,
 
 .game-gallery,
 .game {
-    padding: 80px 100px 20px 100px;
+    padding: 80px 100px 50px 100px;
     text-align: center;
 }
 
@@ -231,10 +242,20 @@ button,
 
 .game-wraper {
     display: flex;
+    justify-content: space-around;
+}
+
+.first-number {
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    outline: none;
+    padding: 5px 10px;
+    width: 100px;
 }
 
 .game-table {
-    background-color: rgb(75, 75, 75);
+    background-color: #44435e;
     border-radius: 5px;
     border-spacing: 4px;
     color: rgb(255, 255, 255);
@@ -244,14 +265,125 @@ button,
 }
 
 .game-table td {
-    background-color: rgb(189, 184, 184);
+    background-color: #bfbfd9;
     border-radius: 3px;
+    cursor: pointer;
     height: 50px;
     width: 50px;
 }
 
+.game-table td.player-1 {
+    background-color: #f76106;
+}
+
+.game-table td.player-2 {
+    background-color: #1db315;
+}
+
+.game-number-block {
+    margin-bottom: 20px;
+}
+
+.game-players-block {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.game-player {
+    align-items: center;
+    border: 1px dotted #fff;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.game-player.player-1.active {
+    background-color: #f76106;
+}
+
+.game-player.player-2.active {
+    background-color: #1db315;
+}
+
+
+.game-player + div {
+    margin-left: 30px;
+}
+
+.game-players-block .player-1::after,
+.game-players-block .player-2::after,
+.player-number {
+    background-color: #fff;
+    border-radius: 50px;
+    color:#28094c;
+    display: flex;
+    font-size: 22px;
+    font-weight: 600;
+    height: 30px;
+    justify-content: center;
+    margin-left: 10px;
+    text-align: center;
+    width: 30px;
+}
+
+.game-players-block .player-1::after {
+    content: "1";
+}
+
+.game-players-block .player-2::after {
+    content: "2";
+}
+
+.player-number {
+    margin: 0 10px;
+}
+
+.game-task {
+    align-items: center;
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.number-block {
+    border: 1px dotted #fff;
+    font-family: Verdana;
+    font-size: 30px;
+    font-weight: 600;
+    margin: 0 10px;
+    padding: 20px;
+}
+
+.game-result {
+    align-items: center;
+    display: none;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.game-result.active {
+    display: flex;
+}
+
+.winner-message {
+    align-items: center;
+    display: flex;
+}
+
 footer {
-    padding: 30px 0;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    width: 100%
+}
+
+.copy-rigths {
+    background-color: #27003a;
+    font-size: 12px;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
 }
 
 .contact-form {
@@ -260,6 +392,7 @@ footer {
     box-shadow: inset 0 0 3px 0 #fff;
     display: flex;
     flex-direction: column;
+    margin-bottom: 30px;
     padding: 30px 50px;
 }
 

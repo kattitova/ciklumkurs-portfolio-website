@@ -30,7 +30,7 @@
         <section class="about-me" id="about-me">
             <div class="about-me-text">
                 <h2 class="about-me-title">Про мене</h2>
-                <p class="about-me-content">Вітаю! Мене звуть Катерина і я навчаюся на курсі Front-end розробки від Ciklum і Prometheus. Це сторінка навчального проекту, який спрямований на вивчення HTML, CSS та в подальшому і JS. В ньому представлена розробка міні-гри "Match 4 Multi". Я обрала інтерпритацію гри "Match 4", бо для мене важливо, щоб будь-який проєкт, навчальний чи реальний, мав практичне використання, це збільшує мотивацію його виконання)). Мій старший син зараз навчається в 2му класі та вивчає таблицю множення. І ця гра стане йому в нагоді. З нею він зможе в ігровій формі закріплювати навички множення.</p>
+                <p class="about-me-content">Вітаю! Мене звуть Катерина і я навчаюся на курсі Front-end розробки від Ciklum і <a href="http://prometheus.org.ua" target="_blank">Prometheus</a>. Це сторінка навчального проекту, який спрямований на вивчення HTML, CSS та JS. В ньому представлена розробка міні-гри "Match 4 Multi". Я обрала інтерпритацію гри "Match 4", бо для мене важливо, щоб будь-який проєкт, навчальний чи реальний, мав практичне використання, це збільшує мотивацію його виконання)). Мій старший син зараз навчається в 2му класі та вивчає таблицю множення. І ця гра стане йому в нагоді. З нею він зможе в ігровій формі закріплювати навички множення.</p>
             </div>
             <img src="./image/me.png" alt="про мене">
         </section>
@@ -59,12 +59,29 @@
             <h2 class="game-title">Гра "Match 4 Multi"</h2>
             <div class="game-wraper">
                 <div class="game-header">
-                    <div class="game-number-block"></div>
+                    <div class="game-number-block">
+                        <div>
+                            <span>Оберіть число</span>
+                            <select class="first-number"></select>
+                        </div>
+                    </div>
                     <div class="game-info-block">
                         <button class="game-start">Почати гру</button>
                         <div class="game-players-block">
-                            <div class="game-player player-1">Гравець 1</div>
-                            <div class="game-player player-2">Гравець 2</div>
+                            <div class="game-player player-1" target="1">Гравець</div>
+                            <div class="game-player player-2" target="2">Гравець</div>
+                        </div>
+                        <div>
+                            <div class="game-task">
+                                Гравець<span class="player-number"></span>знайди в таблиці відповідь для прикладу:
+                            </div>
+                            <div>
+                                <span class="number-block first"></span> x <span class="number-block second"></span>
+                            </div>
+                            <div class="game-result">
+                                <div class="winner-message">Виграв гравець<span class="player-number"></span>Вітаю!</div>
+                                <div class="non-winner-message">Нічия! Всі молодці!</span></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -87,6 +104,7 @@
                 <button type="submit">Відправити</button>
             </form>
         </section>
+        <section class="copy-rigths">(c) Розроблено: Титова Катерина, 2024 р.</section>
     </footer>
     <script src="script.js"></script>
 </body>
