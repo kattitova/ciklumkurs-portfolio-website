@@ -265,11 +265,19 @@ button:hover {
 }
 
 .game-table td {
-    background-color: #bfbfd9;
+    background-color: #a8a8c1;
     border-radius: 3px;
     cursor: pointer;
     height: 50px;
     width: 50px;
+}
+
+.game-table td.block {
+    pointer-events: none;
+}
+
+.game-table td.error {
+    background-color: red;
 }
 
 .game-table td.player-1 {

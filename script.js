@@ -1,5 +1,6 @@
 //число ходів
 let countMove = 0;
+let tableArr = new Array();
 
 //генерує числа 0..1 для заповнення тега select
 const select = document.querySelector(".first-number");
@@ -42,12 +43,19 @@ function setActivePlayer(num) {
 function genTable (size, num) {
     const table = document.querySelector(".game-table");
     table.innerHTML = "";
+    let ind = 0;
     for (let i = 0; i < size; i++) {
         let tr = document.createElement("tr");
 
         for (let j = 0; j < 6; j++) {
             let td = document.createElement("td");
-            if (num != "") td.innerHTML = rand(num, 10*num, num);
+            if (num != "") {
+                let randNum = rand(num, 10*num, num);
+                td.innerHTML = randNum;
+                td.setAttribute("ind", ind);
+                tableArr[ind] = randNum;
+                ind++;
+            }
             else td.innerHTML = num;
             
             //обробка кліка на комірку таблиці зі значенням
@@ -56,20 +64,39 @@ function genTable (size, num) {
                 let result=Number(select.value)*Number(secondNumber.innerHTML);
                 if (result == Number(td.innerHTML)) {
                     let activePlayer = document.querySelector(".game-player.active");
-                    td.classList.add(`player-${activePlayer.getAttribute("target")}`);
+                    //отримує номер гравця, що ходить
+                    let activePlayerNumber = activePlayer.getAttribute("target");
+                    //дає комірці номер гравця, що обрав комірку, та клас block, який блокує подальщі кліки на комірку
+                    td.classList.add(`player-${activePlayerNumber}`, "block");
+                    //записує в масив, який гравець обрав конкретну комірку
+                    tableArr[Number(td.getAttribute("ind"))]= -1 * Number(activePlayerNumber);
+                    //рахує ходи
                     countMove++;
+                    // змінює хід гравця
                     if (countMove % 2 == 0) setActivePlayer(1);
                     else setActivePlayer(2);
                     //перевірити чи є правильна відповідь на полі для нового згенерованого числа, якщо ні, згенерувати заново
-                    secondNumber.innerHTML = randSecondNumber();
+                    //генерує новє друге число
+                    let genSecondNumber = randSecondNumber();
+                    //рахує множення першого числа з новим другим числом та шукає його в масиві - таблиці відповідей
+                    let checkResult = tableArr.findIndex((element) => element == genSecondNumber * Number(select.value));
+                    while (checkResult < 0) {
+                        genSecondNumber = randSecondNumber();
+                        checkResult = tableArr.findIndex((element) => element == genSecondNumber * Number(select.value));
+                        if (countMove == 36) break;
+                    }
+                    secondNumber.innerHTML = genSecondNumber;
                 }
                 else {
                     //додати звук фейл.мп3
                     console.log("fail");
+                    td.classList.add("error");
+                    setTimeout(function(){
+                        td.classList.remove("error");
+                    }, 500)
                 }
-
-                //зафарбування комірки у колір гравця
-                //зберігання відповіді гравця в масиві
+                //зафарбувати неправильну відповідь в червоне на 1-2 с
+                //додати аудіо
                 //перевірка на перемогу чи ничію
             });
 
@@ -86,8 +113,9 @@ genTable (size, "");
 const buttonStartGame = document.querySelector(".game-start");
 buttonStartGame.addEventListener("click", () => {
     const num = Number(select.value);
+    countMove = 0;
     //заповнює таблицю згенерованими числами
-    genTable (size, num);
+    genTable(size, num);
 
     //дає право першого хода першому гравцю
     setActivePlayer(1);
