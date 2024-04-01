@@ -26,6 +26,12 @@ const size = 6; //розмір ігрового поля 6х6
 //селектор другого числа
 const secondNumber = document.querySelector(".number-block.second");
 
+//функція додати аудио
+function addAudio (src) {
+    const myAudio = new Audio(src);
+    myAudio.play();
+}
+
 function setActivePlayer(num) {
     //прибирає клас active з обох гравців
     const players = document.querySelectorAll(".game-player");
@@ -62,7 +68,9 @@ function genTable (size, num) {
             td.addEventListener("click", () => {
                 //перевірка правильності відповіді
                 let result=Number(select.value)*Number(secondNumber.innerHTML);
+                //якщо відповідь правильна
                 if (result == Number(td.innerHTML)) {
+                    addAudio("./sound/correct.mp3");
                     let activePlayer = document.querySelector(".game-player.active");
                     //отримує номер гравця, що ходить
                     let activePlayerNumber = activePlayer.getAttribute("target");
@@ -83,19 +91,19 @@ function genTable (size, num) {
                     while (checkResult < 0) {
                         genSecondNumber = randSecondNumber();
                         checkResult = tableArr.findIndex((element) => element == genSecondNumber * Number(select.value));
-                        if (countMove == 36) break;
+                        if (countMove == size * size) break;
                     }
                     secondNumber.innerHTML = genSecondNumber;
                 }
                 else {
                     //додати звук фейл.мп3
                     console.log("fail");
+                    addAudio("./sound/fail.mp3");
                     td.classList.add("error");
                     setTimeout(function(){
                         td.classList.remove("error");
                     }, 500)
                 }
-                //зафарбувати неправильну відповідь в червоне на 1-2 с
                 //додати аудіо
                 //перевірка на перемогу чи ничію
             });
@@ -112,7 +120,13 @@ genTable (size, "");
 //клік по кнопці Старт Гри
 const buttonStartGame = document.querySelector(".game-start");
 buttonStartGame.addEventListener("click", () => {
+    //відображає блок із гравцями та прикладом
+    const gameInfoBlock = document.querySelector(".game-info-block");
+    gameInfoBlock.classList.remove("hidden");
+
+    //перше число обране в випадаючому списку
     const num = Number(select.value);
+    //кількість ходів
     countMove = 0;
     //заповнює таблицю згенерованими числами
     genTable(size, num);
