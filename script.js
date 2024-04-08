@@ -4,6 +4,12 @@ let tableArr = new Array();
 
 //генерує числа 0..1 для заповнення тега select
 const select = document.querySelector(".first-number");
+//ховає блок із гравцями та прикладом, щоб гравець заново натиснув кнопку Почати гру
+const gameInfoBlock = document.querySelector(".game-info-block");
+select.addEventListener("change", () => {
+    gameInfoBlock.classList.add("hidden");
+});
+
 for (let i = 1; i <= 10; i++) {
     let option = document.createElement("option");
     option.setAttribute("value", i);
@@ -104,7 +110,6 @@ function genTable (size, num) {
                         td.classList.remove("error");
                     }, 500)
                 }
-                //додати аудіо
                 //перевірка на перемогу чи ничію
             });
 
@@ -121,7 +126,6 @@ genTable (size, "");
 const buttonStartGame = document.querySelector(".game-start");
 buttonStartGame.addEventListener("click", () => {
     //відображає блок із гравцями та прикладом
-    const gameInfoBlock = document.querySelector(".game-info-block");
     gameInfoBlock.classList.remove("hidden");
 
     //перше число обране в випадаючому списку
