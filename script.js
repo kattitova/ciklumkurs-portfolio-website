@@ -1,6 +1,12 @@
 //число ходів
 let countMove = 0;
+// массив для чисел таблиці
 let tableArr = new Array();
+
+//змінна, що відповідає за статус гри
+let gameStatus = "new"; //new || winning || nonwinner
+
+const gameHeader = document.querySelector(".game-header");
 
 //генерує числа 0..1 для заповнення тега select
 const select = document.querySelector(".first-number");
@@ -52,8 +58,60 @@ function setActivePlayer(num) {
     playerNumber.innerHTML = num;
 }
 
-function genTable (size, num) {
-    const table = document.querySelector(".game-table");
+//функція перевірки чи є правильна відповідь на полі для нового згенерованого числа, якщо ні, згенерувати заново
+const genSecondNumberFunc = (tableArr) => {
+    //генерує новє друге число
+    let genSecondNumber = randSecondNumber();
+    //рахує множення першого числа з новим другим числом та шукає його в масиві - таблиці відповідей
+    let checkResult = tableArr.findIndex((element) => element == genSecondNumber * Number(select.value));
+    while (checkResult < 0) {
+        genSecondNumber = randSecondNumber();
+        checkResult = tableArr.findIndex((element) => element == genSecondNumber * Number(select.value));
+        if (countMove == size * size) break;
+    }   
+    return genSecondNumber;
+}
+
+//перевірка на перемогу чи нічию
+const checkWinner = (tableArr) => {
+    let playerWinnerNumber = 0;
+
+    //перевірка горизонтальних ліній на наявність 4х відповідей одного гравця
+    //відокремлюємо кожний горизонтальний рядок по 6 комірок
+    const checkLine = (line, player) => {
+        let sum = 0;
+        for(let i = 0; i < line.length; i++) {
+            let line4 = line.slice(i, i+4);
+            if (line4.length === 4) {
+                sum = line4.reduce((acc, el) => {
+                    if (el < 0) acc+=el;
+                    return acc;
+                }, 0);
+                if (sum === player * 4) return player;
+            }
+        }
+        return 0;
+    }
+    
+    for (let i = 0; i < tableArr.length; i+=size) {
+        //відокремлюємо кожний горизонтальний рядок по size (=6) комірок
+        const horizontLine = tableArr.slice(i, i+size);
+        if (checkLine(horizontLine, -1) === -1) playerWinnerNumber = 1;
+        if (checkLine(horizontLine, -5) === -5) playerWinnerNumber = 2;
+    }
+
+    //перевірка вертикальних ліній на наявність 4х відповідей одного гравця
+
+    //перевірка діагональних ліній 0->35 на наявність 4х відповідей одного гравця
+
+    //перевірка діагональних ліній 30->5 на наявність 4х відповідей одного гравця
+
+    return playerWinnerNumber;
+}
+
+const table = document.querySelector(".game-table");
+
+function genTable (size, num) {    
     table.innerHTML = "";
     let ind = 0;
     for (let i = 0; i < size; i++) {
@@ -83,26 +141,32 @@ function genTable (size, num) {
                     //дає комірці номер гравця, що обрав комірку, та клас block, який блокує подальщі кліки на комірку
                     td.classList.add(`player-${activePlayerNumber}`, "block");
                     //записує в масив, який гравець обрав конкретну комірку
-                    tableArr[Number(td.getAttribute("ind"))]= -1 * Number(activePlayerNumber);
+                    tableArr[Number(td.getAttribute("ind"))]= Number(activePlayerNumber)===1 ? -1 : -5;
                     //рахує ходи
                     countMove++;
                     // змінює хід гравця
                     if (countMove % 2 == 0) setActivePlayer(1);
                     else setActivePlayer(2);
                     //перевірити чи є правильна відповідь на полі для нового згенерованого числа, якщо ні, згенерувати заново
-                    //генерує новє друге число
-                    let genSecondNumber = randSecondNumber();
-                    //рахує множення першого числа з новим другим числом та шукає його в масиві - таблиці відповідей
-                    let checkResult = tableArr.findIndex((element) => element == genSecondNumber * Number(select.value));
-                    while (checkResult < 0) {
-                        genSecondNumber = randSecondNumber();
-                        checkResult = tableArr.findIndex((element) => element == genSecondNumber * Number(select.value));
-                        if (countMove == size * size) break;
+                    secondNumber.innerHTML = genSecondNumberFunc(tableArr);
+                    //console.log(tableArr);
+
+                    //перевірка на перемогу чи ничію
+                    const gameResult = checkWinner(tableArr);
+                    if (countMove === 36 && gameResult === 0) {
+                        gameStatus = "nonwinner";
+                        console.log("nichya");
+                        toggleNonWinnerResult();
+                        gameInfoBlock.classList.toggle("hidden");
                     }
-                    secondNumber.innerHTML = genSecondNumber;
+                    if (gameResult !== 0) {
+                        gameStatus = "winning";
+                        toggleWinnerResult(gameResult);
+                        gameInfoBlock.classList.toggle("hidden");
+                    }
                 }
                 else {
-                    //додати звук фейл.мп3
+                    //звук fail.мп3 при невірній відповіді
                     console.log("fail");
                     addAudio("./sound/fail.mp3");
                     td.classList.add("error");
@@ -110,13 +174,46 @@ function genTable (size, num) {
                         td.classList.remove("error");
                     }, 500)
                 }
-                //перевірка на перемогу чи ничію
+                
+                console.log(countMove);
             });
 
             tr.appendChild(td);
         }
         table.appendChild(tr);
     }
+}
+
+//функція, яка ховає/відображає блок з перемогою
+function toggleWinnerResult (gameResult) {
+    const setWinnerPlayer = document.querySelector(".player-number.winner");
+    setWinnerPlayer.textContent = gameResult; 
+    
+    const winnerMessage = document.querySelector(".winner-message");
+    winnerMessage.classList.toggle("hidden");
+    const winerPlayerNumber = winnerMessage.querySelector(".player-number");
+    winerPlayerNumber.className = "player-number winner";
+    winerPlayerNumber.classList.add(`player-${gameResult}`);
+
+    const gameResultBlock = document.querySelector(".game-result");
+    gameResultBlock.classList.toggle("hidden");
+
+    table.classList.toggle("block");
+
+    gameHeader.classList.toggle("winner");
+}
+
+//функція, яка ховає/відображає блок з нічиєю
+function toggleNonWinnerResult () {
+    const nonWinnerMessage = document.querySelector(".non-winner-message");
+    nonWinnerMessage.classList.toggle("hidden");
+
+    const gameResultBlock = document.querySelector(".game-result");
+    gameResultBlock.classList.toggle("hidden");
+
+    table.classList.toggle("block");
+
+    gameHeader.classList.toggle("winner");
 }
 
 //малює порожню таблицю
@@ -127,6 +224,12 @@ const buttonStartGame = document.querySelector(".game-start");
 buttonStartGame.addEventListener("click", () => {
     //відображає блок із гравцями та прикладом
     gameInfoBlock.classList.remove("hidden");
+    if (gameStatus === "nonwinner") toggleNonWinnerResult();
+    else if (gameStatus === "winning") toggleWinnerResult("");
+    table.classList.remove("block");
+    gameStatus = "new";
+
+    gameHeader.classList.add("active");
 
     //перше число обране в випадаючому списку
     const num = Number(select.value);
@@ -143,5 +246,5 @@ buttonStartGame.addEventListener("click", () => {
     firstNumber.innerHTML = num;
 
     //додає друге число
-    secondNumber.innerHTML = randSecondNumber();
+    secondNumber.innerHTML = genSecondNumberFunc(tableArr);
 });

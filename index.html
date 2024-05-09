@@ -14,7 +14,7 @@
 </head>
 <body>
     <header>
-        <div class="header-wraper">
+        <div class="header-wrapper">
             <h1>Катерина Титова</h1>
             <nav>
                 <ul>
@@ -58,8 +58,9 @@
         </section>
         <section class="game" id="play">
             <h2 class="game-title">Гра "Match 4 Multi"</h2>
-            <div class="game-wraper">
+            <div class="game-wrapper">
                 <div class="game-header">
+                    <div class="game-intro-block">Для того, щоб почати гру, оберіть число з випадаючого списку - перший множник, та натисніть кнопку Почати гру.</div>
                     <div class="game-number-block">
                         <div>
                             <span>Оберіть число</span>
@@ -78,16 +79,19 @@
                             </div>
                             <div>
                                 <span class="number-block first"></span> x <span class="number-block second"></span>
-                            </div>
-                            <div class="game-result">
-                                <div class="winner-message">Виграв гравець<span class="player-number"></span>Вітаю!</div>
-                                <div class="non-winner-message">Нічия! Всі молодці!</span></div>
-                            </div>
+                            </div>  
                         </div>
+                    </div>
+                    <div class="game-result hidden">
+                        <div class="winner-message hidden">
+                            <h3>Гра закінчилася!</h3>
+                            <p>Виграв гравець<span class="player-number winner"></span>Вітаю!</p>
+                        </div>
+                        <div class="non-winner-message hidden">Нічия! Всі молодці!</span></div>
                     </div>
                 </div>
                 <div class="game-main">
-                    <table class="game-table"></table>
+                    <table class="game-table block"></table>
                 </div>
             </div>
         </section>

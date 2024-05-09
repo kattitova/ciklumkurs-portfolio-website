@@ -36,7 +36,7 @@ header {
   width: 100%;
   z-index: 1000;
 }
-header .header-wraper {
+header .header-wrapper {
   background: rgb(40, 9, 73);
   background: linear-gradient(45deg, rgb(40, 9, 73) 0%, rgb(64, 15, 140) 100%, rgb(11, 8, 48) 100%);
   align-items: center;
@@ -73,7 +73,7 @@ header .nav-link.active::after {
   left: 50%;
   position: absolute;
   transform: translateX(-50%);
-  width: 60px;
+  width: 100%;
 }
 header h1 {
   font-size: 16px;
@@ -212,6 +212,8 @@ button:hover,
 .game {
   padding: 80px 100px 50px 100px;
   text-align: center;
+  overflow: hidden;
+  height: 520px;
 }
 
 .game-gallery-title,
@@ -226,31 +228,47 @@ button:hover,
   width: 200px;
 }
 
-.game-wraper {
+.game-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  overflow: hidden;
 }
 
 .game-header {
   align-items: center;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(5, auto);
+  justify-items: center;
+  overflow: hidden;
+  grid-gap: 10px;
 }
 .game-header .game-start {
   height: auto;
   width: -moz-fit-content;
   width: fit-content;
 }
-
-.game-main {
-  margin: 0 auto;
+.game-header .game-intro-block {
+  width: 420px;
+  height: 100px;
+  border: 1px dotted white;
+  padding: 20px 50px;
 }
-
+.game-header.active {
+  transform: translateY(-100px);
+  transition: transform 0.5s ease-in-out;
+}
 .game-info-block {
   display: block;
+  transform: translateY(0);
+  transition: transform 1s ease-in-out;
+  visibility: visible;
 }
 .game-info-block.hidden {
-  display: none;
+  transform: translateY(100%);
+  visibility: hidden;
+  height: 0;
 }
 
 .first-number {
@@ -271,6 +289,12 @@ button:hover,
   font-size: 22px;
   font-weight: 700;
   text-align: center;
+  opacity: 1;
+  transition: opacity 1s linear;
+}
+.game-table.block {
+  pointer-events: none;
+  opacity: 0.5;
 }
 .game-table td {
   background-color: #a8a8c1;
@@ -364,17 +388,45 @@ button:hover,
 
 .game-result {
   align-items: center;
-  display: none;
+  display: flex;
   flex-direction: column;
   margin-top: 50px;
+  border: 1px dotted #fff;
+  padding: 20px 50px;
+  visibility: visible;
 }
-.game-result.active {
-  display: flex;
+.game-result.hidden {
+  visibility: hidden;
 }
 
 .winner-message {
   align-items: center;
   display: flex;
+  flex-direction: column;
+}
+.winner-message.hidden {
+  display: none;
+}
+.winner-message p {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+.winner-message .player-number {
+  color: white;
+}
+.winner-message .player-number.player-1 {
+  background-color: #f76106;
+}
+.winner-message .player-number.player-2 {
+  background-color: #1db315;
+}
+
+.non-winner-message {
+  font-weight: bold;
+}
+.non-winner-message.hidden {
+  display: none;
 }
 
 footer {

@@ -43,7 +43,7 @@ header {
     width: 100%;
     z-index: 1000;
 
-    .header-wraper {
+    .header-wrapper {
         background: rgb(40,9,73);
         background: linear-gradient(45deg, rgba(40,9,73,1) 0%, rgba(64,15,140,1) 100%, rgba(11,8,48,1) 100%);
         align-items: center;
@@ -85,7 +85,7 @@ header {
             left: 50%;
             position: absolute;
             transform: translateX(-50%);
-            width: 60px;    
+            width: 100%;   
         }
     }
 
@@ -229,6 +229,8 @@ button,
 .game {
     padding: 80px 100px 50px 100px;
     text-align: center;
+    overflow: hidden;
+    height: 520px;
 }
 
 .game-gallery-title,
@@ -243,31 +245,62 @@ button,
     width: 200px;
 }
 
-.game-wraper {
+.game-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    overflow: hidden;
 }
 
 .game-header {
     align-items: center;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, auto);
+    justify-items: center;
+    //grid-auto-rows: 0;
+    //overflow-y: hidden;
+    overflow: hidden;
+    grid-gap: 10px;
 
     .game-start {
         height: auto;
         width: fit-content;
     }
-}
 
-.game-main {
-    margin: 0 auto;
+    .game-intro-block {
+        width: 420px;
+        height: 100px;
+        border: 1px dotted white;
+        padding: 20px 50px;
+        
+    }
+
+    &.active {
+        transform: translateY(-100px);
+            transition: transform 0.5s ease-in-out;
+        .game-intro-block {
+            // transform: translateY(-100%);
+            // transition: transform 0.5s ease-in-out;
+        }
+
+        &.winner {
+            //grid-template-rows: 0 20% 15% 0 60%;
+        }
+    }
+
 }
 
 .game-info-block {
     display: block;
+    transform: translateY(0);
+    transition: transform 1s ease-in-out;
+    visibility: visible;
 
     &.hidden {
-        display: none;
+        transform: translateY(100%);
+        visibility: hidden;
+        height: 0;
     }
 }
 
@@ -292,6 +325,13 @@ $player2Color: #1db315;
     font-size: 22px;
     font-weight: 700;
     text-align: center;
+    opacity: 1;
+    transition: opacity 1s linear;
+
+    &.block {
+        pointer-events: none;
+        opacity: 0.5;
+    }
 
     td {
         background-color: #a8a8c1;
@@ -393,18 +433,56 @@ $player2Color: #1db315;
 
 .game-result {
     align-items: center;
-    display: none;
+    display: flex;
     flex-direction: column;
     margin-top: 50px;
+    border: 1px dotted $colorWhite;
+    padding: 20px 50px;
+    //transform: translateY(0);
+    //transition: transform 1s ease-in-out;
+    visibility: visible;
 
-    &.active {
-        display: flex;
+    &.hidden {
+        visibility: hidden;
+        //transform: translateY(100%);
+        //transition: transform 1s ease-in-out;
     }
 }
 
 .winner-message {
     align-items: center;
     display: flex;
+    flex-direction: column;
+
+    &.hidden {
+        display: none;
+    }
+
+    p {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .player-number {
+        color:white;
+
+        &.player-1 {
+            background-color: $player1Color;
+        }
+
+        &.player-2 {
+            background-color: $player2Color;
+        }
+    }
+
+}
+
+.non-winner-message {
+    font-weight: bold;
+    &.hidden {
+        display: none;
+    }
 }
 
 footer {
