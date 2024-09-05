@@ -72,13 +72,52 @@ const genSecondNumberFunc = (tableArr) => {
     return genSecondNumber;
 }
 
+const setWinnerCell = (startInd, ind, type) => {
+    const gameTable = document.querySelector(".game-table");
+    const allTD = gameTable.querySelectorAll("td");
+    switch (type) {
+        case "row": 
+            const indexRow = startInd + ind;
+            for(let i = indexRow; i < indexRow + 4; i++) {
+                allTD[i].classList.add("win-row");
+            }
+            break;
+            
+        case "column": 
+            const indexCol = startInd + size * ind;
+            for(let i = indexCol; i <= indexCol + 3 * size; i = i + size) {
+                allTD[i].classList.add("win-col");
+            }
+            break;
+
+        case "diagonal-left":
+            const indexDiagLeft = startInd + size * ind + ind;
+            for (let i = indexDiagLeft; i <= indexDiagLeft + 3 * (size + 1); i = i + size + 1) {
+                allTD[i].classList.add("win-diagonal-left");
+            }
+            break;
+        
+        case "diagonal-right":
+            const indexDiagRight = startInd - (size - 1) * ind;
+            for (let i = indexDiagRight; i >= indexDiagRight - 3 * (size - 1); i = i - (size - 1)) {
+                allTD[i].classList.add("win-diagonal-right");
+            }
+            break;
+
+        default: break;
+    }
+}
+
 //перевірка на перемогу чи нічию
-const checkWinner = (tableArr) => {
+const checkWinner = (tableArr, activePlayer) => {
+    //за ходи першого гравця в масиві відповідають значення -1
+    //за ходи другого гравця в масиві відповідають значення -5
+    const playerInd = activePlayer === 1 ? -1 : -5;
     let playerWinnerNumber = 0;
 
     //перевірка горизонтальних ліній на наявність 4х відповідей одного гравця
-    //відокремлюємо кожний горизонтальний рядок по 6 комірок
-    const checkLine = (line, player) => {
+    //перевіряємо чи є в рядку підряд чотири комірки зі зніченням одного з гравців -1 або -5
+    const checkLine = (line, player, startInd, type) => {
         let sum = 0;
         for(let i = 0; i < line.length; i++) {
             let line4 = line.slice(i, i+4);
@@ -87,7 +126,10 @@ const checkWinner = (tableArr) => {
                     if (el < 0) acc+=el;
                     return acc;
                 }, 0);
-                if (sum === player * 4) return player;
+                if (sum === player * 4) { console.log(startInd, i, type);
+                    setWinnerCell(startInd, i, type);
+                    return activePlayer;
+                }
             }
         }
         return 0;
@@ -96,15 +138,65 @@ const checkWinner = (tableArr) => {
     for (let i = 0; i < tableArr.length; i+=size) {
         //відокремлюємо кожний горизонтальний рядок по size (=6) комірок
         const horizontLine = tableArr.slice(i, i+size);
-        if (checkLine(horizontLine, -1) === -1) playerWinnerNumber = 1;
-        if (checkLine(horizontLine, -5) === -5) playerWinnerNumber = 2;
+        const checkResult = checkLine(horizontLine, playerInd, i, "row");
+        if(checkResult !==0) {
+            playerWinnerNumber = checkResult;
+            break;
+        }
     }
 
     //перевірка вертикальних ліній на наявність 4х відповідей одного гравця
+    for (let i = 0; i < size; i++) {
+        const verticalLine = [];
+        for (let j = i; j < tableArr.length; j += size) {
+            verticalLine.push(tableArr[j]);
+        }
+        const checkResult = checkLine(verticalLine, playerInd, i, "column");
+        if(checkResult !==0) {
+            playerWinnerNumber = checkResult;
+            break;
+        }
+    }
 
     //перевірка діагональних ліній 0->35 на наявність 4х відповідей одного гравця
-
+    
+    let h = 1;
+    for (let i = 0; i <= 12; i+=h) {
+        const leftDiagonalLine = [];
+        if (i === 3) {
+            i=6;
+            h=6;
+        }
+        for (let j = i; j < tableArr.length; j+=size+1) {
+            if (j !== 30) { //костиль, щоб в третю зліва діагональ не потрапляв зайвий елемент з індексом 30
+                if(tableArr[j]) leftDiagonalLine.push(tableArr[j]);
+            }
+        }
+        
+        const checkResult = checkLine(leftDiagonalLine, playerInd, i, "diagonal-left");
+        if(checkResult !==0) {
+            playerWinnerNumber = checkResult;
+            break;
+        }
+    }
+    
     //перевірка діагональних ліній 30->5 на наявність 4х відповідей одного гравця
+    for (let i = 18; i <= 32; i+=h) {
+        const rightDiagonalLine = [];
+        const exceptionArr = [0, 1, 2, 6, 7, 12]; //массив костилів елементів, які не мають потрапити в праві діагоналі
+        for(j = i; j > 0; j-=size-1) {
+            if (!exceptionArr.includes(j)) {
+                if(tableArr[j]) rightDiagonalLine.push(tableArr[j]);
+            }
+        }
+        if (i === 30) h = 1;
+
+        const checkResult = checkLine(rightDiagonalLine, playerInd, i, "diagonal-right");
+        if(checkResult !==0) {
+            playerWinnerNumber = checkResult;
+            break;
+        }
+    }
 
     return playerWinnerNumber;
 }
@@ -137,11 +229,27 @@ function genTable (size, num) {
                     addAudio("./sound/correct.mp3");
                     let activePlayer = document.querySelector(".game-player.active");
                     //отримує номер гравця, що ходить
-                    let activePlayerNumber = activePlayer.getAttribute("target");
+                    let activePlayerNumber = activePlayer.getAttribute("data-player");
                     //дає комірці номер гравця, що обрав комірку, та клас block, який блокує подальщі кліки на комірку
                     td.classList.add(`player-${activePlayerNumber}`, "block");
                     //записує в масив, який гравець обрав конкретну комірку
                     tableArr[Number(td.getAttribute("ind"))]= Number(activePlayerNumber)===1 ? -1 : -5;
+
+                    //перевірка на перемогу чи ничію
+                    const gameResult = checkWinner(tableArr, Number(activePlayerNumber));
+                    if (countMove === 36 && gameResult === 0) {
+                        gameStatus = "nonwinner";
+                        console.log("nichya");
+                        toggleNonWinnerResult();
+                        gameInfoBlock.classList.toggle("hidden");
+                    }
+                    if (gameResult !== 0) {
+                        console.log(`win ${gameResult} player`);
+                        gameStatus = "winning";
+                        toggleWinnerResult(gameResult);
+                        gameInfoBlock.classList.toggle("hidden");
+                    }
+
                     //рахує ходи
                     countMove++;
                     // змінює хід гравця
@@ -150,20 +258,6 @@ function genTable (size, num) {
                     //перевірити чи є правильна відповідь на полі для нового згенерованого числа, якщо ні, згенерувати заново
                     secondNumber.innerHTML = genSecondNumberFunc(tableArr);
                     //console.log(tableArr);
-
-                    //перевірка на перемогу чи ничію
-                    const gameResult = checkWinner(tableArr);
-                    if (countMove === 36 && gameResult === 0) {
-                        gameStatus = "nonwinner";
-                        console.log("nichya");
-                        toggleNonWinnerResult();
-                        gameInfoBlock.classList.toggle("hidden");
-                    }
-                    if (gameResult !== 0) {
-                        gameStatus = "winning";
-                        toggleWinnerResult(gameResult);
-                        gameInfoBlock.classList.toggle("hidden");
-                    }
                 }
                 else {
                     //звук fail.мп3 при невірній відповіді
@@ -175,7 +269,7 @@ function genTable (size, num) {
                     }, 500)
                 }
                 
-                console.log(countMove);
+                //console.log(countMove);
             });
 
             tr.appendChild(td);
