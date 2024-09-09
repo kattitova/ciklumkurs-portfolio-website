@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link href="styles.css" rel="stylesheet"> -->
+    <link href="styles-new.css" rel="stylesheet">
+    <link href="responsive.css" rel="stylesheet">
+    <link href="./image/favicon.ico" rel="icon" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="script.js" defer></script>
+    <script src="menu.js" defer></script>
+    <script src="gallery.js" defer></script>
+    <script src="contact.js" defer></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <title>Game Website</title>
+</head>
+<body>
+    <header>
+        <div class="header-wrapper">
+            <h1>Катерина Титова</h1>
+            <div class="nav-icon"><i class="fa-solid fa-ellipsis-vertical"></i> <i class="fa-solid fa-bars"></i></div>
+            <nav class="navigation">
+                <ul>
+                    <li><a href="#about-me" class="nav-link active">Про мене</a></li>
+                    <li><a href="#about-game" class="nav-link">Міні-гра</a></li>
+                    <li><a href="#gallery" class="nav-link">Галерея</a></li>
+                    <li><a href="#play" class="nav-link">Грати!</a></li>
+                </ul>
+            </nav>
+            <a href="#contact" class="contact-me"><i class="fa-solid fa-phone"></i> <span>Зв'язатися зі мною</span></a>
+        </div>
+    </header>
+    <main>
+        <section class="about-me" id="about-me">
+            <div class="about-me-text">
+                <h2 class="about-me-title">Про мене</h2>
+                <div class="about-me-content">Вітаю! Мене звуть Катерина. Я - Frontend розробник і в своїй роботі я прагну до створення якісного та естетично привабливого продукту зі зручним для користувача інтерфейсом. У розробці я використовую сучасні технології розробки HTML5, CSS3/SCSS, JS, ReactJS. Не зупиняюсь на досягнутому, постійно розвиваюсь та вдосконалюю свої знання. Відкрита до коммунікації та співпраці.
+                    <div class="about-me-links">
+                        <a href="https://www.linkedin.com/in/kateryna-tytova/" target="blank"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://github.com/kattitova" target="blank"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://t.me/titova_katrina" target="blank"><i class="fa-brands fa-telegram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <img src="./image/me.png" alt="про мене">
+            <div class="about-me-project">
+                <p> Це сторінка навчального проєкту, який був виконаний мною під час навчання на курсі Front-end розробки від Ciklum і <a href="http://prometheus.org.ua" target="_blank">Prometheus</a>. Цей проєкт спрямований на вивчення HTML, SCSS та JS. В ньому представлена розробка міні-гри "Match 4 Multi". Я обрала інтерпритацію гри "Match 4", бо для мене важливо, щоб будь-який проєкт, навчальний чи реальний, мав практичне використання - це збільшує мотивацію його виконання)). Мій старший син зараз навчається в 3му класі та вивчає таблицю множення. І ця гра стане гарним інтерактивним доповненням до навчання йому та іншим дітям початкової школи. З нею вони зможуть в ігровій формі закріплювати навички множення. Бо, як відомо, у грі діти навчаются швидко і з задоволенням.</p>
+            </div>
+        </section>
+        <section class="about-game" id="about-game">
+            <div class="about-game-text">
+                <h2 class="about-game-title">Гра <br>"Match 4 Multi"</h2>
+                <div class="about-game-info">
+                    <div class="game-info-players"><i class="fa-solid fa-user-group"></i>2 players</div>
+                    <div class="game-info-age"><div class="about-game-age">7+</div>years</div>
+                </div>
+            </div>
+            <div class="about-game-content">
+                <p>Гра "Match 4 Multi" дозволяє весело, цікаво і з користю провести час, як дітям так і дорослим. Гра "Match 4" схожа на класичні хрестики-нулики, але в ній потрібно зібрати <strong>чотири</strong> комірки одного кольору по вертикалі, горизонталі або діагоналі. У назві додатково присутньо слово Multi, бо це математична інтерпритація звичайної гри Match 4. В ній можна обирати лише ті комірки, які є результатом <strong>множення двох чисел</strong>. Перше число обирається на початку гри, а друге число генерується заново на кожному ході гравців. Ця гра розроблена для полегшення вивчення таблиці множення в ігровій формі для школярів молодших класів, а також для розвинення в них логічного та аналітичного мислення. Гра розрахована на двох гравців, які будуть змагатися, хто першим складе ряд власного кольору.</p>
+                <br>
+                <p><strong>Правила гри</strong>. На початку гри обирається перше незмінне число. Далі натискається кнопка "Почати гру". На екрані кольором підсвічується, який гравець зараз може зробити хід. Активний гравець має порахувати результат множення двох чисел, знайти відповідну комірку з результатом і клікнути на неї. Якщо відповідь правильна, комірка зафарбується у колір активного ігрока. Якщо відповідь неправильна, комірка тимчасово підсвітиться червоним. В цьому випадку гравцю треба ще раз подумати над результатом та вибрати іншу комірку з правильною відповіддю. Далі хід переходить до наступного гравця. Перемагає той, хто першим зможе зібрати горизонтальний, вертикальний або діагональний рядок свого кольору з чьотирьох комірок.</p>
+            </div>
+        </section>
+        <section class="game-gallery" id="gallery">
+            <h2 class="game-gallery-title">Галерея гри</h2>
+            <div class="gallery-wrapper">
+                <div class="gallery-image active"><img src="./image/1.jpg" alt=""></div>
+                <div class="gallery-image"><img src="./image/2.jpg" alt=""></div>
+                <div class="gallery-image"><img src="./image/3.jpg" alt=""></div>
+                <div class="gallery-image"><img src="./image/4.jpg" alt=""></div>
+            </div>
+        </section>
+        <section class="game" id="play">
+            <h2 class="game-title">Гра "Match 4 Multi"</h2>
+            <div class="game-wrapper">
+                <div class="game-header">
+                    <div class="game-intro-block">Для того, щоб почати гру, оберіть число з випадаючого списку - перший множник, та натисніть кнопку Почати гру.</div>
+                    <div class="game-number-block">
+                        <div>
+                            <span>Оберіть число</span>
+                            <select class="first-number"></select>
+                        </div>
+                    </div>
+                    <button class="game-start">Почати гру</button>
+                    <div class="game-info-block hidden">
+                        <div class="game-players-block">
+                            <div class="game-player player-1" data-player="1">Гравець</div>
+                            <div class="game-player player-2" data-player="2">Гравець</div>
+                        </div>
+                        <div>
+                            <div class="game-task">
+                                <div class="game-task-player">Гравець<span class="player-number"></span></div>знайди в таблиці відповідь для прикладу:
+                            </div>
+                            <div class="number-block-wrapper">
+                                <span class="number-block first"></span> x <span class="number-block second"></span>
+                            </div>  
+                        </div>
+                    </div>
+                    <div class="game-result hidden">
+                        <div class="winner-message hidden">
+                            <h3>Гра закінчилася!</h3>
+                            <p>Виграв гравець<span class="player-number winner"></span>Вітаю!</p>
+                        </div>
+                        <div class="non-winner-message hidden"><span>Нічия! Всі молодці!</span></div>
+                    </div>
+                </div>
+                <div class="game-main">
+                    <table class="game-table block"></table>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer id="contact">
+        <section>
+            <form class="contact-form">
+                <h3>Форма зворотнього зв'язку</h3>
+                <label for="name">Ім'я:</label>
+                <input id="name" type="text" required>
+                <label for="email">E-mail:</label>
+                <input id="email" type="email" required>
+                <label for="message">Повідомлення:</label>
+                <textarea id="message" required></textarea>
+                <p class="form-hint">поля, обов'язкові для заповнення</p>
+                <button type="submit">Відправити</button>
+            </form>
+            <div class="contact-form message hidden">
+                <p>Дякую за увагу!<br>Ваше повідомлення відправлене</p>
+                <button class="form-return-button">Назад</button>
+            </div>
+        </section>
+        <div class="copy-rigths">(c) Розроблено: Титова Катерина, 2024 р.</div>
+    </footer>
+</body>
+</html>
