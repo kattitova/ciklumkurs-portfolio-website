@@ -32,6 +32,9 @@
     justify-items: center;
     gap: 0;
   }
+  .about-me .about-me-project {
+    grid-column: 1/span 1;
+  }
   .game {
     height: auto;
   }

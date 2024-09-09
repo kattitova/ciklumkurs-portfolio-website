@@ -128,19 +128,9 @@ button:hover,
   padding: 80px 100px 0;
   justify-content: space-between;
   gap: 30px;
-  grid-template-columns: 1fr 0.8fr;
+  grid-template-columns: 1fr 0.6fr;
   position: relative;
-}
-.about-me::before {
-  content: "";
-  background-image: url(./image/line.png);
-  background-repeat: repeat;
-  display: block;
-  height: 165px;
-  left: 0;
-  top: 165px;
-  position: absolute;
-  width: 42px;
+  min-height: 100vh;
 }
 .about-me img {
   height: auto;
@@ -148,12 +138,19 @@ button:hover,
   max-width: 500px;
   align-self: end;
 }
+.about-me p {
+  border-left: 2px solid #f5e0f7;
+  padding: 15px;
+}
+.about-me .about-me-project {
+  grid-column: 1/span 2;
+}
 
 .about-me-text {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  margin-bottom: 30px;
+  position: relative;
 }
 
 .about-me-title {
@@ -164,10 +161,34 @@ button:hover,
 
 .about-me-content {
   border-left: 2px solid #f5e0f7;
-  padding-left: 15px;
+  padding: 15px;
+  position: relative;
 }
 .about-me-content a {
   font-weight: 600;
+}
+.about-me-content::before {
+  content: "";
+  background-image: url(./image/line.png);
+  background-repeat: repeat;
+  display: block;
+  height: 165px;
+  left: -50px;
+  bottom: 0;
+  position: absolute;
+  width: 42px;
+}
+
+.about-me-links {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+.about-me-links i {
+  font-size: 26px;
+}
+.about-me-links i:hover {
+  color: #D8A8E1;
 }
 
 .about-game {
