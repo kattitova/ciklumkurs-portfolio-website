@@ -40,6 +40,7 @@
 
         .about-me-project {
             grid-column: 1 / span 1;
+            margin-top: 15px;
         }
     }
 
@@ -122,13 +123,6 @@
     .gallery-image {
         max-width: 200px;
     }
-    //     height: 200px;
-    //     margin: 5px;
-
-    //     &.active {
-    //         max-width: 200px;
-    //     }
-    // }
 }
 
 @media screen and (max-width: 500px){
@@ -151,6 +145,11 @@
 }
 
 @media screen and (max-width: 450px){
+    body {
+        div, p {
+            font-size: 14px;
+        }
+    }
     .game-main {
         width: 100%;
         aspect-ratio: 1/1;

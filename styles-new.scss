@@ -732,3 +732,14 @@ footer {
         align-items: center;
     }
 }
+
+.animation-block {
+    opacity: 0;
+    transform: translateY(100%);
+
+    &.active {
+        opacity: 1;
+        transition: all 1s;
+        transform: translateY(0%);
+    }
+}

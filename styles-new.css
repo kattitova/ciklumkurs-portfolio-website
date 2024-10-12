@@ -643,4 +643,14 @@ footer .copy-rigths {
   font-size: 12px;
   display: flex;
   align-items: center;
+}
+
+.animation-block {
+  opacity: 0;
+  transform: translateY(100%);
+}
+.animation-block.active {
+  opacity: 1;
+  transition: all 1s;
+  transform: translateY(0%);
 }/*# sourceMappingURL=styles-new.css.map */
